@@ -25,6 +25,12 @@
             align-items: center;
             min-height: 100vh;
             position: relative;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
 
         .card {
@@ -36,6 +42,12 @@
             text-align: center;
             padding: 20px;
             position: relative;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .card.dark-mode {
+            background-color: #2c3e50;
+            color: var(--dark-text);
         }
 
         h1 {
@@ -75,16 +87,32 @@
             background-color: #219150;
         }
 
-        .lang-switch {
+        .lang-switch, .theme-switch {
             position: absolute;
             top: 15px;
-            left: 15px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             padding: 5px 10px;
             border: 1px solid var(--primary-color);
             border-radius: 8px;
             color: var(--primary-color);
+            background: white;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .theme-switch {
+            right: 15px;
+        }
+
+        .lang-switch {
+            left: 15px;
+        }
+
+        body.dark-mode .lang-switch,
+        body.dark-mode .theme-switch {
+            border-color: #f59e0b;
+            color: #f59e0b;
+            background: #2c3e50;
         }
 
         .ramadan-deco {
@@ -101,15 +129,6 @@
             height: auto;
         }
 
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            body { background-color: var(--dark-bg); color: var(--dark-text); }
-            .card { background-color: #2c3e50; color: var(--dark-text); }
-            .buy-btn { background-color: #f59e0b; color: #1e293b; }
-            .buy-btn:hover { background-color: #d97706; }
-            .lang-switch { border-color: #f59e0b; color: #f59e0b; }
-        }
-
     </style>
 </head>
 <body>
@@ -122,6 +141,9 @@
 <!-- زر تغيير اللغة -->
 <div class="lang-switch" id="langSwitch">EN</div>
 
+<!-- زر تغيير الإضاءة -->
+<div class="theme-switch" id="themeSwitch">🌙</div>
+
 <!-- البطاقة الرئيسية -->
 <div class="card" id="card">
     <h1 id="title">نوت بوك فاخرة</h1>
@@ -132,10 +154,9 @@
     </p>
     
     <div class="price-tag" id="price">
-        150 <span>جنيه مصري</span>
+        150 <span>جنيه</span>
     </div>
 
-    <!-- زر WhatsApp بعد تصحيح الرابط -->
     <a href="https://wa.me/201203328683?text=أريد%20طلب%20note%20book" class="buy-btn" id="buyBtn">
         اطلب الآن عبر واتساب
     </a>
@@ -159,18 +180,23 @@
         if (isArabic) {
             document.getElementById('title').innerText = "نوت بوك فاخرة";
             document.getElementById('specs').innerHTML = "📏 الحجم: A5 <br>📄 عدد الورق: 120 ورقة <br>🖋️ جودة الورق: 80 جرام";
-            document.getElementById('price').innerHTML = "150 <span>جنيه مصري</span>";
             document.getElementById('buyBtn').innerText = "اطلب الآن عبر واتساب";
             langBtn.innerText = "EN";
             document.body.dir = "rtl";
         } else {
             document.getElementById('title').innerText = "Premium Notebook";
             document.getElementById('specs').innerHTML = "📏 Size: A5 <br>📄 Pages: 120 sheets <br>🖋️ Paper quality: 80g";
-            document.getElementById('price').innerHTML = "150 <span>EGP</span>";
             document.getElementById('buyBtn').innerText = "I want to order Notebook";
             langBtn.innerText = "AR";
             document.body.dir = "ltr";
         }
+    });
+
+    // تغيير الإضاءة يدوياً
+    const themeBtn = document.getElementById('themeSwitch');
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        document.getElementById('card').classList.toggle('dark-mode');
     });
 </script>
 
