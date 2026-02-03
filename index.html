@@ -3,193 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نوت بوك فاخرة</title>
-
+    <title>متجر النوت بوك المميز</title>
     <style>
+        /* ألوان الموقع */
         :root {
-            --bg: #f4f6fb;
-            --card: #ffffff;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --soft: #f9fafb;
-            --green: #22c55e;
+            --primary-color: #2563eb;
+            --accent-color: #f59e0b;
+            --bg-color: #f4f4f9;
+            --text-color: #1e293b;
+            --dark-bg: #1e293b;
+            --dark-text: #f4f4f9;
         }
 
-        body.dark {
-            --bg: #0f172a;
-            --card: #020617;
-            --text: #e5e7eb;
-            --muted: #9ca3af;
-            --soft: #020617;
-            --green: #22c55e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        /* Reset & Body */
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: var(--bg);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 15px;
-            transition: background 0.3s;
+            min-height: 100vh;
         }
 
+        /* Card */
         .card {
-            background: var(--card);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
             width: 100%;
-            max-width: 360px;
-            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            position: relative;
-            transition: background 0.3s;
-        }
-
-        .toggle {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--soft);
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 13px;
-            cursor: pointer;
-            color: var(--text);
-            user-select: none;
-        }
-
-        .image-box {
-            position: relative;
-            height: 260px;
-            background: #e5e7eb;
-        }
-
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #e74c3c;
-            color: white;
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-
-        .content {
-            padding: 20px;
             text-align: center;
-            color: var(--text);
+            transition: transform 0.3s;
+            padding: 20px;
         }
 
-        .title {
-            font-size: 22px;
-            margin-bottom: 6px;
-            font-weight: bold;
+        .card:hover {
+            transform: translateY(-5px);
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 14px;
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .specs {
-            background: var(--soft);
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 18px;
+            color: #555;
+            margin-bottom: 20px;
         }
 
-        .price {
-            font-size: 26px;
+        .price-tag {
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 6px;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
 
-        .currency {
-            font-size: 15px;
-            color: var(--green);
+        .price-tag span {
+            font-size: 18px;
+            color: #27ae60;
         }
 
-        .shipping {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 18px;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            background: var(--green);
+        .buy-btn {
+            background-color: #27ae60;
             color: white;
+            padding: 12px 30px;
             text-decoration: none;
-            padding: 14px;
-            border-radius: 30px;
-            font-size: 16px;
+            border-radius: 25px;
             font-weight: bold;
-            box-shadow: 0 8px 20px rgba(34,197,94,0.4);
+            display: inline-block;
+            transition: background 0.3s;
         }
 
-        .footer-note {
-            margin-top: 12px;
-            font-size: 12px;
-            color: var(--muted);
+        .buy-btn:hover {
+            background-color: #219150;
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--dark-bg);
+                color: var(--dark-text);
+            }
+            .card {
+                background-color: #2c3e50;
+                color: var(--dark-text);
+            }
+            .buy-btn {
+                background-color: #f59e0b;
+                color: #1e293b;
+            }
+            .buy-btn:hover {
+                background-color: #d97706;
+            }
         }
     </style>
 </head>
-
 <body>
 
 <div class="card">
-
-    <div class="toggle" onclick="toggleMode()">🌙 
+    <h1>نوت بوك فاخرة</h1>
+    <p class="specs">
+        📏 الحجم: A5 <br>
+        📄 عدد الورق: 120 ورقة <br>
+        🖋️ جودة الورق: 80 جرام
+    </p>
     
+    <div class="price-tag">
+        150 <span>جنيه مصري</span>
     </div>
 
-    <div class="content">
-        <div class="title">نوت بوك فاخرة</div>
-        <div class="subtitle">مثالية للمذاكرة وتدوين الأفكار ✨</div>
-
-        <div class="specs">
-            📏 الحجم: A5 <br>
-            📄 عدد الأوراق: 120 ورقة <br>
-            🖋️ جودة الورق: 80 جرام
-        </div>
-
-        <div class="price">
-            150 <span class="currency">جنيه مصري</span>
-        </div>
-
-        <div class="shipping">🚚 شحن لجميع 
-        <a href="https://wa.me/201203328683?text=أريد%20طلب%20النوتبوك" class="buy-btn">
-    اطلب الآن عبر واتساب
-</a>
-
-        <div class="footer-note">الدفع عند الاستلام</div>
-    </div>
+    <a href="https://wa.me/201203328683?text=أريد%20طلب%20النوتبوك" class="buy-btn">
+        اطلب الآن عبر واتساب
+    </a>
 </div>
-
-<script>
-    function toggleMode() {
-        document.body.classList.toggle("dark");
-    }
-</script>
 
 </body>
 </html>
